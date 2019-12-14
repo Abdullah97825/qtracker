@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">QTracker</string>
+    <string name="login_Text">Username</string>
+    <string name="login_Text2">Password</string>
+    <string name="login_Button">Track</string>
+</resources>
