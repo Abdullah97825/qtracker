@@ -1,0 +1,186 @@
+html{
+  margin:0;
+}
+
+body{
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100vh;
+  width: 100vw;
+  font-family: Helvetica;
+}
+
+/*nav bar components*/
+.navBar{
+  width:100%;
+  height: 150px;
+  background: #3e37aa;
+  display: block;
+  align-items: baseline;
+}
+
+h3{
+  color:white;
+  margin-left: 1em;
+}
+
+.navBar button{
+  margin-top: 15px;
+  margin-left: 1em;
+  height: 35px;
+  border-radius: 5px;
+  background: white;
+  color: #3e37aa;
+  font-weight: normal;
+}
+
+#appointBtn{
+  display: none;
+}
+
+#patientBtn{
+  display: none;
+}
+
+.navItems{
+  display: flex;
+  align-items: baseline;
+}
+
+.navItems h1{
+  color:white;
+  margin-left: 1em;
+}
+
+.navItems h5{
+  color:white;
+  margin-left: 1em;
+  margin-left: 55%;
+}
+
+/*end of navbar components*/
+
+
+/*modal components*/
+.modalBody{
+  display: grid;
+  grid-template-columns:repeat(2, 2fr);
+}
+
+.modalBody input[type=text]{
+  border-radius: 3px;
+  border:none;
+  background-color: #eee;
+  padding:13px;
+  margin-bottom: 3em;
+  width:15em;
+  height:2em;
+}
+.modalBody input[type=date]{
+  border-radius: 3px;
+  border:none;
+  background-color: #eee;
+  padding:3px;
+  margin-bottom: 3em;
+  width:15em;
+  height:2em;
+}
+.modalBody input[type=time]{
+  border-radius: 3px;
+  border:none;
+  background-color: #eee;
+  padding:3px;
+  margin-bottom: 3em;
+  width:15em;
+  height:2em;
+}
+
+.modalBody select{
+  height:2em;
+  width:15em;
+  border:none;
+  border-radius: 3px;
+  background-color: #eee;
+  padding:3px;
+}
+/*end of modal components*/
+
+/*side bar and content blocks*/
+.wrapper{
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-column-gap:1em;
+}
+.sideBar{
+  background:white;
+  height:100%;
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sideBar a{
+  display: block;
+  color: grey;
+  padding: 2em 0 2em 3em;
+  text-decoration: none;
+
+}
+.sideBar a:hover{
+  opacity:0.4;
+  transition: opacity ease-in .2s;
+}
+
+.section1 {
+  border-bottom: 1px solid grey;
+}
+
+.section2 {
+  display: block;
+}
+
+
+/* For the following, I used CSS Grids to arrange the elements(GOOGLE IT FAM)
+grid-template-columns is used to specify how you want the elements are spaced
+apart.*/
+
+
+.queueblock{
+  display: grid;
+  grid-template-columns:repeat(3, 3fr);
+  color: #85869d;
+  text-align: center;
+  padding-top: 2em;
+  background-color: white;
+  z-index: 1;
+  margin:-65px 30px 0 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.appointmentblock{
+  display: grid;
+  grid-template-columns:repeat(4, 4fr);
+  color:#85869d;
+  text-align: center;
+  padding-top: 2em;
+  background-color: white;
+  z-index: 1;
+  margin: -65px 30px 0 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.patientblock{
+  display: grid;
+  grid-template-columns: 25% 25% 50%;
+  color:#85869d;
+  text-align: center;;
+  padding-top: 2em;
+  background-color: white;
+  z-index: 1;
+  margin: -65px 30px 0 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*end of contents block*/
