@@ -1,8 +1,8 @@
-<?php
+<?php 
 
   require 'config/config.php';
 
-  if (isset($_SESSION['emailDoc'])) {
+  if (isset($_SESSION['email'])) {
     /*
 	  $userLoggedIn = $_SESSION['username'];
 	  $user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
@@ -34,11 +34,7 @@ style.css and script.js files-->
     <div class="navBar">
       <div class="navItems">
         <h1>QTracker</h1>
-        <h3>Doctors Interface</h3>
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
+        <img src="profilepic.jpg" alt="">
         <h5>UserName</h5>
       </div>
       <div>
@@ -78,36 +74,6 @@ style.css and script.js files-->
           <a href="#" id="queuetab">Queue</a>
           <a href="#" id="appointtab">Appointments</a>
           <a href="#" id="patienttab">Patient Folders</a>
-          <form action="includes/handlers/removeFromQueue.php" method="POST">
-                  <input  type="submit" name="remove_Patient" value="Next Patient">
-                  <?php
-
-                    $email = $_SESSION['emailDoc'];
-                    $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
-                    if(!$doctorsEntries){
-                      echo "Error: (doctorEntries) " . mysqli_error($con);
-                    }
-
-                    $row = mysqli_fetch_array($doctorsEntries);
-                    $queueName = 'q' . $row['ssn'];
-
-                    $_SESSION['docQueue'] = $queueName;
-
-                    $queueEntries = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
-                    if(!$queueEntries){
-                            echo "Error: (queueEntries) " . mysqli_error($con);
-                    }
-
-                    $row = mysqli_fetch_array($queueEntries);
-                    $patientID = $row['patientID'];
-                    $_SESSION['id'] = $patientID;
-
-                    echo "<input type=\"hidden\" name=\"remove_id\" id=\"selected_text\" value=\"" . $patientID . "/>";
-                    echo "<input type=\"hidden\" name=\"doc_queue\" id=\"selected_text\" value=\"" . $queueName . "/>";
- 
-                  ?>
-
-          </form>
         </div>
         <div class="section2">
           <a href="#">Settings</a>
@@ -119,38 +85,21 @@ style.css and script.js files-->
           ID
         </div>
         <div class="column">
-          Patient Name
+          Name
         </div>
         <div class="column">
           Arrival Time
         </div>
-        <?php
-        $email = $_SESSION['emailDoc'];
-        $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
-              if(!$doctorsEntries){
-                echo "Error: (doctorEntries) " . mysqli_error($con);
-              }
-
-        $row = mysqli_fetch_array($doctorsEntries);
-        $queueName = 'q' . $row['ssn'];
-
-        $queueEntries = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
-        if(!$queueEntries){
-                echo "Error: (queueEntries) " . mysqli_error($con);
-        }
-
-        while($row = mysqli_fetch_array($queueEntries)){
-            $patientID = $row['patientID'];
-            $patientEntries = mysqli_query($con, "SELECT * FROM patients WHERE id='$patientID'");
-            if(!$patientEntries){
-              echo "Error: (patientEntries)" . mysqli_error($con);
-            }
-            $patientRow = mysqli_fetch_array($patientEntries);
-            $patientName = $patientRow['name'];
-            echo "<div>". $patientID . "</div>" . "<div>". $patientName . "</div>" . "<div>". $row['ts'] . "</div>" ;
-        }
-        ?>
-
+        <div class="column">
+          Exp Service Time
+        </div>
+        <div class="column">
+          Doc.Name
+        </div>
+        <div class="column">
+          Q Number
+        </div>
+        
       </div>
 
       <div class="appointmentblock">
@@ -165,6 +114,9 @@ style.css and script.js files-->
         </div>
         <div class="column">
           Time
+        </div>
+        <div class="column">
+         Name
         </div>
       </div>
 
