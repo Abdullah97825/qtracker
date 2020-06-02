@@ -4,6 +4,9 @@ $(document).ready(function() {
 //When you load the page, you start off in the queue tab
   $('.appointmentblock').hide();
   $('.patientblock').hide();
+  $('#patientBtn').hide();
+  $('#appointBtn').hide();
+  $('#queueBtn').show();
 //this is for when you click the appointment tab on the sidebar
 //It hides the other classes and shows the appointment class
 
