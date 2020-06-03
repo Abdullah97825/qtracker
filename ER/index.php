@@ -18,7 +18,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, intial-scale=1">
-    <title>QTracker</title>
+    <title>QTracker | ER | Receptionist  </title>
 <!-- These links tags add bootstrap and jQuery to the code as well as link the
 style.css and script.js files-->
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -32,7 +32,7 @@ style.css and script.js files-->
     <div class="navBar">
       <div class="navItems">
         <h1>QTracker</h1>
-        <h3>Receptionists Interface</h3>
+        <h3>ER Receptionists Interface</h3>
         <h5>UserName</h5>
       </div>
 
@@ -61,7 +61,8 @@ style.css and script.js files-->
                 <div class="modal-body" >
                   <form class="modalBody" action="includes/handlers/enqueue.php" method="POST">
 
-                  <input type="text" name="enqueue_id" placeholder="ID" value="<?php
+                  <input type="text" name="enqueue_id" placeholder="ID"
+                  value="<?php
                   if(isset($_SESSION['enqueue_id'])) {
                     echo $_SESSION['enqueue_id'];
                   }
@@ -83,9 +84,11 @@ style.css and script.js files-->
               </div>
             </div>
           </div>
+          <!-- Commenting this out here also.
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
           </div>
+        -->
         </div>
       </div>
     </div>
@@ -141,34 +144,39 @@ style.css and script.js files-->
           <div class="modal-body" >
             <form class="modalBody" action="includes/handlers/newPatient.php" method="POST">
 
-            <input type="text" name="reg_id" placeholder="ID" value="<?php
+            <input type="text" name="reg_id" placeholder="ID"
+            value="<?php
             if(isset($_SESSION['reg_id'])) {
               echo $_SESSION['reg_id'];
             }
             ?>" required>
             <br>
 
-            <input type="text" name="reg_fname" placeholder="Name" value="<?php
+            <input type="text" name="reg_fname" placeholder="Name"
+             value="<?php
             if(isset($_SESSION['reg_fname'])) {
               echo $_SESSION['reg_fname'];
             }
             ?>" required>
             <br>
-            <input type="text" name="reg_lname" placeholder="Surname" value="<?php
+            <input type="text" name="reg_lname" placeholder="Surname"
+            value="<?php
             if(isset($_SESSION['reg_lname'])) {
               echo $_SESSION['reg_lname'];
             }
             ?>" required>
             <br>
 
-            <input type="text" name="reg_address" placeholder="address" value="<?php
+            <input type="text" name="reg_address" placeholder="address"
+            value="<?php
             if(isset($_SESSION['reg_address'])) {
               echo $_SESSION['reg_address'];
             }
             ?>" required>
             <br>
 
-            <input type="text" name="reg_phone" placeholder="phone" value="<?php
+            <input type="text" name="reg_phone" placeholder="phone"
+            value="<?php 
             if(isset($_SESSION['reg_phone'])) {
               echo $_SESSION['reg_phone'];
             }

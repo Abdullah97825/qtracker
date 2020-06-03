@@ -186,6 +186,9 @@ h3 {
     display: grid;
     grid-template-columns: 15% 85%;
     grid-column-gap: 1em;
+    margin:-18px auto;
+    position: relative;
+    height:100%;
 }
 
 .sideBar {
@@ -202,17 +205,14 @@ h3 {
     text-decoration: none;
 }
 
-#nextPatientBtn {
-    background-color: #F90915;
-    color: white;
-}
 
-.sideBar input[type=submit] {
+
+.nextPatientBtn{
     display: block;
     background-color: #F90915;
     color: white;
-    padding: 2em 6em 2em 3em;
-    overflow-x: hidden;
+    padding: 2em 0em 2em 0em;
+    width:100%;
     text-align: center;
     text-decoration: none;
     border: none;
@@ -220,12 +220,12 @@ h3 {
 
 .sideBar input[type=submit]:hover {
     opacity: 0.4;
-    transition: opacity ease-in .2s;
+    transition: ease-in .2s;
 }
 
 .sideBar a:hover {
     opacity: 0.4;
-    transition: opacity ease-in .2s;
+    transition: ease-in .2s;
 }
 
 .section1 {
@@ -247,11 +247,10 @@ apart.*/
     color: #85869d;
     text-align: center;
     padding-top: 2em;
-    /*height: 70vh;*/
     overflow-y: scroll;
     background-color: white;
     z-index: 1;
-    margin: -65px 30px 0 15px;
+    margin: -56px 30px 0 15px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -262,9 +261,10 @@ apart.*/
     color: #85869d;
     text-align: center;
     padding-top: 2em;
+    overflow-y: scroll;
     background-color: white;
     z-index: 1;
-    margin: -65px 30px 0 15px;
+    margin: -56px 30px 0 15px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -274,11 +274,11 @@ apart.*/
     grid-template-columns: 25% 25% 50%;
     color: #85869d;
     text-align: center;
-    /*;*/
+    overflow-y: scroll;
     padding-top: 2em;
     background-color: white;
     z-index: 1;
-    margin: -65px 30px 0 15px;
+    margin: -56px 30px 0 15px;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

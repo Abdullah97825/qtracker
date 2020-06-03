@@ -18,7 +18,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, intial-scale=1">
-    <title>QTracker</title>
+    <title>QTracker Recptionist UI</title>
 <!-- These links tags add bootstrap and jQuery to the code as well as link the
 style.css and script.js files-->
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -61,12 +61,13 @@ style.css and script.js files-->
                 <div class="modal-body" >
                   <form class="modalBody" action="includes/handlers/enqueue.php" method="POST">
 
-                  <input type="text" name="enqueue_id" placeholder="ID" value="<?php
+                  <input type="text" name="enqueue_id" placeholder="ID"
+                  value="<?php
                   if(isset($_SESSION['enqueue_id'])) {
                     echo $_SESSION['enqueue_id'];
                   }
                   ?>" required>
-                  <br>  
+                  <br>
 
                   <select class="" name="selected_text">
                     <?php
@@ -90,9 +91,15 @@ style.css and script.js files-->
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+
+
+        <!--Commented this out modal footer out because it was causing the problem in the display.
+            if you need it, add it into the modal div not outside -->
+
+
+        <!--  <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -148,34 +155,39 @@ style.css and script.js files-->
           <div class="modal-body" >
             <form class="modalBody" action="includes/handlers/enqueue.php" method="POST">
 
-            <input type="text" name="reg_id" placeholder="ID" value="<?php
+            <input type="text" name="reg_id" placeholder="ID"
+            value="<?php
             if(isset($_SESSION['reg_id'])) {
               echo $_SESSION['reg_id'];
             }
             ?>" required>
             <br>
 
-            <input type="text" name="reg_fname" placeholder="Name" value="<?php
+            <input type="text" name="reg_fname" placeholder="Name"
+            value="<?php
             if(isset($_SESSION['reg_fname'])) {
               echo $_SESSION['reg_fname'];
             }
             ?>" required>
             <br>
-            <input type="text" name="reg_lname" placeholder="Surname" value="<?php
+            <input type="text" name="reg_lname" placeholder="Surname"
+            value="<?php
             if(isset($_SESSION['reg_lname'])) {
               echo $_SESSION['reg_lname'];
             }
             ?>" required>
             <br>
 
-            <input type="text" name="reg_address" placeholder="address" value="<?php
+            <input type="text" name="reg_address" placeholder="address"
+            value="<?php
             if(isset($_SESSION['reg_address'])) {
               echo $_SESSION['reg_address'];
             }
             ?>" required>
             <br>
 
-            <input type="text" name="reg_phone" placeholder="phone" value="<?php
+            <input type="text" name="reg_phone" placeholder="phone"
+            value="<?php
             if(isset($_SESSION['reg_phone'])) {
               echo $_SESSION['reg_phone'];
             }
@@ -190,6 +202,7 @@ style.css and script.js files-->
         </div>
       </div>
     </div>
+<!--End of Modals-->
 
     <div class="wrapper">
       <div class="sideBar">

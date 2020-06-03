@@ -36,7 +36,7 @@ body {
 
 .switch {
     position: relative;
-    display: inline-block;
+    display: flex;
     width: 60px;
     height: 34px;
     margin-left: 55%;
@@ -181,11 +181,15 @@ h3 {
 
 
 /*side bar and content blocks*/
-
+/*Side bar begins here*/
 .wrapper {
     display: grid;
     grid-template-columns: 15% 85%;
     grid-column-gap: 1em;
+    position: relative;
+    margin: -18px auto;
+    height:100%;
+
 }
 
 .sideBar {
@@ -202,30 +206,28 @@ h3 {
     text-decoration: none;
 }
 
-#nextPatientBtn {
-    background-color: #3e37aa;
-    color: white;
-}
+/*Replaced .sideBar input[type=submit] with a class .nextPatientBtn*/
 
-.sideBar input[type=submit] {
-    display: block;
+.nextPatientBtn {
     background-color: #3e37aa;
     color: white;
-    padding: 2em 6em 2em 3em;
-    overflow-x: hidden;
+    display: block;
+    padding: 2em 0em 2em 0em;
+    width:100%;
     text-align: center;
     text-decoration: none;
-    border: none;
+    border:none;
 }
 
-.sideBar input[type=submit]:hover {
+
+.nextPatientBtn:hover {
     opacity: 0.4;
-    transition: opacity ease-in .2s;
+    transition:  ease-in .2s;
 }
 
 .sideBar a:hover {
     opacity: 0.4;
-    transition: opacity ease-in .2s;
+    transition:  ease-in .2s;
 }
 
 .section1 {
@@ -235,6 +237,7 @@ h3 {
 .section2 {
     display: block;
 }
+/*SideBar ends here*/
 
 
 /* For the following, I used CSS Grids to arrange the elements(GOOGLE IT FAM)
@@ -247,8 +250,7 @@ apart.*/
     color: #85869d;
     text-align: center;
     padding-top: 2em;
-    /height: 70vh;
-    */ overflow-y: scroll;
+    overflow-y: scroll;
     background-color: white;
     z-index: 1;
     margin: -65px 30px 0 15px;
@@ -274,7 +276,6 @@ apart.*/
     grid-template-columns: 25% 25% 50%;
     color: #85869d;
     text-align: center;
-    ;
     padding-top: 2em;
     background-color: white;
     z-index: 1;
