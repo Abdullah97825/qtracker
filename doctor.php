@@ -79,8 +79,8 @@ style.css and script.js files-->
           <a href="#" id="appointtab">Appointments</a>
           <a href="#" id="patienttab">Patient Folders</a>
           <form action="includes/handlers/removeFromQueue.php" method="POST">
-                  <input  type="submit" name="remove_Patient" value="Next Patient">
-                  <?php
+            <input  type="submit" name="remove_Patient" value="Next Patient" class="nextPatientBtn">
+              <?php
 
                     $email = $_SESSION['emailDoc'];
                     $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
@@ -104,9 +104,7 @@ style.css and script.js files-->
 
                     echo "<input type=\"hidden\" name=\"remove_id\" id=\"selected_text\" value=\"" . $patientID . "/>";
                     echo "<input type=\"hidden\" name=\"doc_queue\" id=\"selected_text\" value=\"" . $queueName . "/>";
- 
-                  ?>
-
+                ?>
           </form>
         </div>
         <div class="section2">
