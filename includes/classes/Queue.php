@@ -38,6 +38,8 @@
         public function getServiceTime(){
             return 15;
         }
+	//public function getWaitingTime(){}
+	//public function getTimeInSystem(){}
 
     }
 
