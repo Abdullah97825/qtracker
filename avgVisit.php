@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 require 'config/config.php';
 
@@ -33,18 +32,3 @@ require 'config/config.php';
     }
 
 ?>
-=======
-<?php
-require 'config/config.php';
-
-    function getAvgVisitTime() {
-        //Implementation here.
-    }
-
-    if($con){
-       //echo getAvgVisitTime()
-       echo "37" ;
-    }
-
-?>
->>>>>>> origin/master
