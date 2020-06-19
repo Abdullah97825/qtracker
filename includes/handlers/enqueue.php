@@ -28,51 +28,76 @@ if(isset($_POST['enqueue_patient'])){
 		echo "Error: " . mysqli_error($con);
 	}
 
+	//Get the doctor's queue name
 	$row = mysqli_fetch_array($docSSN);
+	$doctorID = $row['ssn'];
     $queueName = 'q' . $row['ssn'];
-
-		$query = mysqli_query($con, "INSERT INTO $queueName VALUES ('$id', CURRENT_TIMESTAMP, 0,0,0,0,0,0)");
-
-        if(!$query){
-            echo "Error (insert in queue1): " . mysqli_error($con);
-        }
-
-		$doctorID = $row['ssn'];
-		$query = mysqli_query($con, "INSERT INTO queue VALUES ('$id', '$doctorID')");
-
-        if(!$query){
-            echo "Error (insert in queue2): " . mysqli_error($con);
-        }
-/*
+	
 	//Run the simulation
-	$outPutFile = fopen("input.txt", "a") or die("Unable to open file");
 
-	$query = mysqli_query($con, "SELECT * FROM $queueName");
+	$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
+	$outPutFile = fopen($outPutFile_Dir, "a") or die("Unable to open file");
+
+	$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
 	if(!$query){
 		echo "Error (Read doctor queue enqueu.php): " . mysqli_error($con);
 	}
 
+	$pid = 0;
 	while($row = mysqli_fetch_array($query)){
-		$line = $row['patientID'] . " " . $row['arrivalTime'] . " " . $row['serviceTime'] . " " . $row['departureTime'] . " " . $row['waitingTime'] . " " . $row['tsb'] . " " . $row['timeInSystem'] . "\n";  
+		$pid++;
+		$line = $pid . " " . $row['arrivalTime'] . " " . $row['serviceTime'] . " " . $row['departureTime'] . " " . $row['waitingTime'] . " " . $row['tsb'] . " " . $row['timeInSystem'] . "\n";  
         fwrite($outPutFile, $line);
     }
 
 	fclose($outPutFile);
 
-	//Run the program
-    shell_exec("simulation/untitled1.exe");
-	sleep(1);
+	//Insert the patient into the queue with default performance measures
+	$query = mysqli_query($con, "INSERT INTO $queueName VALUES ('$id', CURRENT_TIMESTAMP, 0,0,0,0,0,0)");
 
-    $readFile = "queue.txt";
+    if(!$query){
+        echo "Error (insert in queue1): " . mysqli_error($con);
+    }
+
+	$query = mysqli_query($con, "INSERT INTO queue VALUES ('$id', '$doctorID')");
+
+    if(!$query){
+        echo "Error (insert in queue2): " . mysqli_error($con);
+    }
+
+
+
+	//Run the program
+
+	$mode = "1";	//Simulation mode = arrival
+
+	$simulation_Input_Dir = $queueName . "/";
+
+	echo ("simulation/Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+    shell_exec(dirname(dirname(dirname(__FILE__))) ."simulation/Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+
+	//Read the updated performance measures
+    $readFile = dirname(dirname(dirname(__FILE__))) . '\\' . 'simulation\\' . $queueName . '\\' . 'queue.txt';
     $fileContents = file_get_contents($readFile);
     $parameters = explode(',', $fileContents);
 
-    foreach($parameters as $param){
-        $query = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$param[1]', serviceTime='$param[2]', departureTime='$param[3]', waitingTime='$param[4]', tsb='$param[5]', timeInSystem='$param[6]' WHERE patientID='$param[0]'");
-        if(!$query){
-            echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
-        }
-    }    */
+	//Update the PM's for the queue
+
+	$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
+	if(!$query){
+		echo "Error (Read doctor queue enqueu.php): " . mysqli_error($con);
+	}
+	while($row = mysqli_fetch_array($query)){
+		foreach($parameters as $param){
+			$patientID = $row['patientID'];
+			$query = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$param[1]', serviceTime='$param[2]', departureTime='$param[3]', waitingTime='$param[4]', tsb='$param[5]', timeInSystem='$param[6]' WHERE patientID='$patientID'");
+				if(!$query){
+					echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
+				}
+			}    
+    }
+
+    
 }
 
 //End

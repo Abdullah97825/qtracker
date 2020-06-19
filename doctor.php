@@ -39,7 +39,19 @@ style.css and script.js files-->
           <input type="checkbox">
           <span class="slider round"></span>
         </label>
-        <h5>UserName</h5>
+        <?php
+          $email = $_SESSION['emailDoc'];
+          $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
+          if(!$doctorsEntries){
+              echo "Error: " . mysqli_error($con);
+          }
+          $row = mysqli_fetch_array($doctorsEntries);
+          $ssn = $row['ssn'];
+
+          $doctorsEntries = mysqli_query($con, "SELECT * FROM employees WHERE ssn='$ssn'");
+          $row = mysqli_fetch_array($doctorsEntries);
+          echo "<h5>" . $row['name'] . " " . $row['lname'] . "</h5>";
+        ?>
       </div>
       <div>
         <button type="button" id="serveBtn" class="btn" data-toggle="modal" data-target="#queueModal">

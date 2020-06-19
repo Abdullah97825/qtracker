@@ -33,7 +33,19 @@ style.css and script.js files-->
       <div class="navItems">
         <h1>QTracker</h1>
         <h3>Receptionists Interface</h3>
-        <h5>UserName</h5>
+        <?php
+          $email = $_SESSION['email'];
+          $recepEntries = mysqli_query($con, "SELECT * FROM receptionists WHERE email='$email'");
+          if(!$recepEntries){
+              echo "Error: " . mysqli_error($con);
+          }
+          $row = mysqli_fetch_array($recepEntries);
+          $ssn = $row['ssn'];
+
+          $recepEntries = mysqli_query($con, "SELECT * FROM employees WHERE ssn='$ssn'");
+          $row = mysqli_fetch_array($recepEntries);
+          echo "<h5>" . $row['name'] . " " . $row['lname'] . "</h5>";
+        ?>
       </div>
 
       <div class="dynamicButton">

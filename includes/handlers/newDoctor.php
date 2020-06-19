@@ -107,6 +107,11 @@ if(isset($_POST['register_button']) && ($type === "doctor")){
 		$query = mysqli_query($con, $sql);
 
 
+		$doc_dir = "simulation/" . $tableName;
+
+		mkdir($doc_dir);
+
+
 		array_push($error_array, "<span style='color: #14C800;'>You have successfully been registered.</span><br>");
 
 		//Clear session variables 

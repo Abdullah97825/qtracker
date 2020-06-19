@@ -26,7 +26,8 @@ if($con){
         //Return queue information to the app
         $row = mysqli_fetch_array($result); 
         $q = new Queue($con, $row['patientID'], $row['doctor']);
-        echo $q->getPeopleAhead() . ',' . $patientID . ',' . $q->getServiceTime();
+        //echo $q->getPeopleAhead() . ',' . $patientID . ',' . $q->getServiceTime();
+        echo $q->getPeopleAhead() . ',' . $patientID . ',' . $q->getServiceTime(). ',' . $q->getWaitingTime(). ',' . $q->getTimeInSystem();
 
     } /*else {
         //Patient is not in a queue
