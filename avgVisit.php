@@ -6,7 +6,8 @@ require 'config/config.php';
     }
 
     if($con){
-       echo getAvgVisitTime()
+       //echo getAvgVisitTime()
+       echo "37" ;
     }
 
 ?>
