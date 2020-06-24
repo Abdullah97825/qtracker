@@ -1,0 +1,162 @@
+*{
+  box-sizing: border-box;
+}
+
+html{
+  height:100vh;
+  width:100vw;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+}
+
+body{
+  height:100%;
+  width:100%;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  display:block;
+}
+
+.navBar {
+    width: 100%;
+    height: 10%;
+    background: #3e37aa;
+    display: block;
+    align-items: baseline;
+
+}
+
+.navItems {
+    display: flex;
+    align-items: baseline;
+}
+
+.navItems h1 {
+    color: white;
+    margin-left: 1em;
+}
+
+
+.pageWrapper{
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-column-gap: 1em;
+  position: relative;
+  margin: 0 auto;
+  height:100%;
+  width:100%;
+  background-color: #f1f1f1;
+}
+
+.profileCard{
+  background: #abc;
+  box-shadow: 0px 1px 5px #000;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upper-container{
+  height:35%;
+  background:#3e37aa;
+}
+.image-container{
+  background:#fff;
+  width:180px;
+  height:180px;
+  border-radius: 50%;
+  padding:5px;
+  transform: translate(220px,120px);
+}
+
+.image-container img{
+  width:170px;
+  height:170px;
+  border-radius: 50%;
+}
+
+.lower-container{
+  height:65%;
+  background: #f1f1f1;
+  padding: 20px;
+  padding-top: 40px;
+}
+
+.lower-container h3,h4{
+  line-height: 1.6;
+  font-weight: lighter;
+
+}
+
+.line{
+  display:flex;
+}
+
+.lower-container h3{
+  color:#0e0e0e;
+  opacity: 0.6;
+  font-weight: bold;
+}
+
+.timeline{
+  background: #f1f1f1;
+  box-shadow: 0px 1px 10px #000;
+  border-radius: 6px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  letter-spacing: 2px;
+}
+
+p{
+  font-size:14px;
+  font-weight;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+.timeline-body{
+  margin-left:100px;
+  position: relative;
+}
+
+.timeline-body::after{
+  content: '';
+  width:4px;
+  height:100%;
+  background-color:#4298c3 ;
+  position: absolute;
+  left:-4px;
+  top:0;
+}
+
+.timeline-post{
+  position: relative;
+}
+
+.timeline-post::after{
+  content: '';
+  width:20px;
+  height:20px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  border: 4px solid #4298c3;
+  position: absolute;
+  left: -13px;
+  top: 0;
+  z-index:9;
+}
+
+.date{
+  position: absolute;
+  left: -85px;
+  top:4px;
+  opacity: 0.5;
+  font-size: 13px;
+}
+
+.content{
+  margin:40px;
+  padding-bottom: 40px;
+  border-bottom: 1px dashed #555;
+}
