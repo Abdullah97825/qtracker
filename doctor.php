@@ -3,7 +3,7 @@
   require 'config/config.php';
 
   if (isset($_SESSION['emailDoc'])) {
-    /*
+
 	  $userLoggedIn = $_SESSION['username'];
 	  $user_details_query = mysqli_query($con, "SELECT * FROM users WHERE username='$userLoggedIn'");
 	  $user = mysqli_fetch_array($user_details_query);*/
@@ -39,19 +39,7 @@ style.css and script.js files-->
           <input type="checkbox">
           <span class="slider round"></span>
         </label>
-        <?php
-          $email = $_SESSION['emailDoc'];
-          $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
-          if(!$doctorsEntries){
-              echo "Error: " . mysqli_error($con);
-          }
-          $row = mysqli_fetch_array($doctorsEntries);
-          $ssn = $row['ssn'];
-
-          $doctorsEntries = mysqli_query($con, "SELECT * FROM employees WHERE ssn='$ssn'");
-          $row = mysqli_fetch_array($doctorsEntries);
-          echo "<h5>" . $row['name'] . " " . $row['lname'] . "</h5>";
-        ?>
+        <h5>UserName</h5>
       </div>
       <div>
         <button type="button" id="serveBtn" class="btn" data-toggle="modal" data-target="#queueModal">
@@ -60,7 +48,7 @@ style.css and script.js files-->
       </div>
     </div>
 
-
+  <!-- Doctor Modals-->
   <!-- Service Time Modal-->
     <div id="queueModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
       <div class="modal-dialog">
@@ -83,6 +71,28 @@ style.css and script.js files-->
     </div>
 
 
+    <!-- Next Patient Modal -->
+    <div id="nextPatientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>Patient Notes</h4>
+          </div>
+          <div class="modal-body">
+            <form class="modalBody" action="" method="post" id="patientForm">
+              <label for="patientNote">Doctors Remarks*</label>
+              <textarea name="name" rows="8" cols="80" form="patientForm">...</textarea>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
     <div class="wrapper">
       <div class="sideBar">
@@ -91,7 +101,7 @@ style.css and script.js files-->
           <a href="#" id="appointtab">Appointments</a>
           <a href="#" id="patienttab">Patient Folders</a>
           <form action="includes/handlers/removeFromQueue.php" method="POST">
-            <input  type="submit" name="remove_Patient" value="Next Patient" class="nextPatientBtn">
+            <input  type="submit" name="remove_Patient" value="Next Patient" class="nextPatientBtn" data-toggle="modal" data-target="#nextPatientModal">
               <?php
 
                     $email = $_SESSION['emailDoc'];
