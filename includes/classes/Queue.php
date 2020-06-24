@@ -15,12 +15,11 @@
             $qName = 'q' . $this->ssn;
     
             $this->con = $con;
-		    $this->queueEntries = mysqli_query($con, "SELECT * FROM $qName ORDER BY ts ASC");
+		    $this->queueEntries = mysqli_query($con, "SELECT * FROM $qName ORDER BY ts");
         }
 
         public function getPeopleAhead() {
             
-            $this->queueEntries = mysqli_query($con, "SELECT * FROM $qName ORDER BY ts ASC");
             while($row = mysqli_fetch_array($this->queueEntries)){
                 if($this->pID === $row['patientID']){
                     return $this->peopleAhead;
@@ -38,11 +37,18 @@
         public function getServiceTime(){
             return 15;
         }
-	//public function getWaitingTime(){}
-	//public function getTimeInSystem(){}
 
-	    public function getWaitingTime(){
-            $this->queueEntries = mysqli_query($con, "SELECT * FROM $qName WHERE patientID='$pID'");
+        /*public function getWaitingTime(){
+            return 122;
+        }
+
+        public function getTimeInSystem(){
+            return 137;
+        }*/
+
+        public function getWaitingTime(){
+            $qName = 'q' . $this->ssn;
+            $this->queueEntries = mysqli_query($this->con, "SELECT * FROM $qName WHERE patientID='$this->pID'");
             $row = mysqli_fetch_array($this->queueEntries);
             $waitingTime = $row['waitingTime'];
 
@@ -51,7 +57,8 @@
         }
 
 	    public function getTimeInSystem(){
-            $this->queueEntries = mysqli_query($con, "SELECT * FROM $qName WHERE patientID='$pID'");
+            $qName = 'q' . $this->ssn;
+            $this->queueEntries = mysqli_query($this->con, "SELECT * FROM $qName WHERE patientID='$this->pID'");
             $row = mysqli_fetch_array($this->queueEntries);
             $timeInSystem = $row['timeInSystem'];
 
