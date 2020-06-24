@@ -61,34 +61,7 @@ style.css and script.js files-->
         <div class="section1">
           <a href="#" id="queuetab">Queue</a>
           <a href="#" id="patienttab">Patient Folders</a>
-          <form action="includes/handlers/removeFromQueue.php" method="POST">
-            <input  type="submit" name="remove_Patient" value="Next Patient" class="nextPatientBtn">
-              <?php
-
-                    $email = $_SESSION['emailDoc'];
-                    $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
-                    if(!$doctorsEntries){
-                      echo "Error: (doctorEntries) " . mysqli_error($con);
-                    }
-
-                    $row = mysqli_fetch_array($doctorsEntries);
-                    $queueName = 'q' . $row['ssn'];
-
-                    $_SESSION['docQueue'] = $queueName;
-
-                    $queueEntries = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
-                    if(!$queueEntries){
-                            echo "Error: (queueEntries) " . mysqli_error($con);
-                    }
-
-                    $row = mysqli_fetch_array($queueEntries);
-                    $patientID = $row['patientID'];
-                    $_SESSION['id'] = $patientID;
-
-                    echo "<input type=\"hidden\" name=\"remove_id\" id=\"selected_text\" value=\"" . $patientID . "/>";
-                    echo "<input type=\"hidden\" name=\"doc_queue\" id=\"selected_text\" value=\"" . $queueName . "/>";
-                ?>
-          </form>
+          <input  type="button" name="remove_Patient" value="Next Patient" class="nextPatientBtn" data-toggle="modal" data-target="#nextPatientModal">
         </div>
         <div class="section2">
           <a href="#">Help</a>
@@ -127,7 +100,7 @@ style.css and script.js files-->
             }
             $patientRow = mysqli_fetch_array($patientEntries);
             $patientName = $patientRow['name'];
-            echo "<div>". $patientID . "</div>" . "<div>". $patientName . "</div>" . "<div>". $row['ts'] . "</div>" ;
+            echo "<div><a href=\"patientProfile.php?id=" . $patientID . "\">". $patientID . "</a></div>" . "<div>". $patientName . "</div>" . "<div>". $row['ts'] . "</div>" ;
         }
         ?>
 
@@ -145,5 +118,60 @@ style.css and script.js files-->
         </div>
       </div>
     </div>
+
+    <!-- Next Patient Modal -->
+    <div id="nextPatientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>Patient Notes</h4>
+          </div>
+          <div class="modal-body">
+            <form class="modalBody" action="includes/handlers/removeFromQueue.php" method="post" id="patientForm">
+              <label for="patientNote">Doctors Remarks*</label>
+              <!--<textarea name="name" rows="8" cols="80" form="patientForm">...</textarea>-->
+              <input type="text" name="note" placeholder="Write a note here" value="<?php 
+                  if(isset($_SESSION['note'])) {
+                    echo $_SESSION['note'];
+                  } 
+                  ?>">
+              <input  type="submit" name="remove_Patient" value="Next Patient" class="btn btn-default">
+              <?php
+                    $email = $_SESSION['emailDoc'];
+                    $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
+                    if(!$doctorsEntries){
+                      echo "Error: (doctorEntries) " . mysqli_error($con);
+                    }
+
+                    $row = mysqli_fetch_array($doctorsEntries);
+                    $queueName = 'q' . $row['ssn'];
+
+                    $_SESSION['docQueue'] = $queueName;
+                    $_SESSION['docPostID'] = $row['ssn'];
+
+                    $queueEntries = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
+                    if(!$queueEntries){
+                            echo "Error: (queueEntries) " . mysqli_error($con);
+                    }
+
+                    $row = mysqli_fetch_array($queueEntries);
+                    $patientID = $row['patientID'];
+                    $_SESSION['id'] = $patientID;
+
+
+                    echo "<input type=\"hidden\" name=\"remove_id\" id=\"selected_text\" value=\"" . $patientID . "/>";
+                    echo "<input type=\"hidden\" name=\"doc_queue\" id=\"selected_text\" value=\"" . $queueName . "/>";
+                ?>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
   </body>
 </html>
