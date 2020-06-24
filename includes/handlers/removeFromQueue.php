@@ -19,6 +19,17 @@ if(isset($_POST['remove_Patient'])){
         $queueName = str_replace(' ', '', $queueName);//remove spaces
     }
 
+	//Post doctor notes
+	$note = strip_tags($_POST['note']);
+	$docPostId = $_SESSION['docPostID'];
+
+	$query = mysqli_query($con, "INSERT INTO posts VALUES ('$id', '$docPostId', '$note', CURRENT_TIMESTAMP)");
+	
+	if(!$query){
+		echo "Error: " . mysqli_error($con);
+	}
+
+	echo "Posted to: " . $id . " and doc: " . $docPostId . " and note: " . $note;
 
 
 	$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
