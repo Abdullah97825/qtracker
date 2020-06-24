@@ -7,39 +7,41 @@
         private $fname;
         private $lname;
         private $email;
+        private $doc;
         
         public function __construct($con, $ssn)
         {
             $this->con = $con;
 		    $ssn_details_query = mysqli_query($con, "SELECT * FROM employees WHERE ssn='$ssn'");
-		    $this->ssn = mysqli_fetch_array($ssn_details_query);
+		    $this->doc = mysqli_fetch_array($ssn_details_query);
         }
 
         public function getSSN() {
-            return $this->ssn['ssn'];
+            return $this->doc['ssn'];
         }
 
         public function getEmail() {
-            $email_details_query = mysqli_query($con, "SELECT * FROM doctors WHERE ssn='$ssn'");
+            $ssn = $this->doc['ssn'];
+            $email_details_query = mysqli_query($this->con, "SELECT * FROM doctors WHERE ssn='$ssn'");
             $this->email = mysqli_fetch_array($email_details_query);
             return $this->email['email'];
         }
 
 
         public function getAvailability() {
-            return $this->ssn['available'];
+            return $this->doc['available'];
         }
 
         public function getName(){
-            return $this->ssn['name'];
+            return $this->doc['name'];
         }
 
         public function getLname(){
-            return $this->ssn['lname'];
+            return $this->doc['lname'];
         }
 
         public function getQueueName(){
-            return (q . getSSN());
+            return ("q" . $this->getSSN());
         }
 
     }

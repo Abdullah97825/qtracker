@@ -82,20 +82,27 @@
                     $note = $row['note'];
                     $docID = $row['ssn'];
 
+                    $doc_details_query = mysqli_query($con, "SELECT * FROM employees WHERE ssn='$docID'");
+		            $doc = mysqli_fetch_array($doc_details_query);
+
+                    $doc_Name = $doc['name'];
+                    $doc_Lname = $doc['lname'];
+                    $docName = $doc_Name . " " . $doc_Lname;
+
+                    /*
                     $doc = new Doctor($con, $patientID, $docID);                    
                     $doc_Name = $doc->getName();
                     $doc_Lname = $doc->getLname();
-                    $docName = $doc_Name . " " . $doc_Lname;
-
-                    unset($doc);
+                    $docName = $doc_Name . " " . $doc_Lname;*/
 
                     echo "<div class=\"timeline-post\">
-                    <p class=\"date\">$time</p>
+                    <p class=\"date\">" .date("F j", strtotime($row['ts'])). "</p>
                     <div class=\"content\">
                     <h3 class=\"doctorName\">$docName</h3>
                     <p>$note</p>
                     </div>
                     </div>";
+                    //unset($doc);
                 }
             
             ?>
