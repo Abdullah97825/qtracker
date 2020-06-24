@@ -1,6 +1,6 @@
 <?php
 
-    class 
+    class Doctor
     {
         private $ssn;
         private $con;
