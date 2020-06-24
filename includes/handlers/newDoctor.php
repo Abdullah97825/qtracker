@@ -108,7 +108,8 @@ if(isset($_POST['register_button']) && ($type === "doctor")){
 		$query = mysqli_query($con, $sql);
 
 
-		$doc_dir = "simulation/" . $tableName;
+		//$doc_dir = "simulation/" . $tableName;
+		$doc_dir = "includes/handlers/" . $tableName;
 
 		mkdir($doc_dir);
 

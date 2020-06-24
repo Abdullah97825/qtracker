@@ -34,7 +34,8 @@ if(isset($_POST['enqueue_patient'])){
 	
 	//Run the simulation
 
-	$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
+	//$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
+	$outPutFile_Dir = $queueName . "/" . "input.txt";
 	$outPutFile = fopen($outPutFile_Dir, "a") or die("Unable to open file");
 
 	$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
@@ -72,11 +73,17 @@ if(isset($_POST['enqueue_patient'])){
 
 	$simulation_Input_Dir = $queueName . "/";
 
-	echo ("simulation/Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
-    shell_exec(dirname(dirname(dirname(__FILE__))) ."simulation/Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
-
+	echo ("Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+    //shell_exec(dirname(dirname(dirname(__FILE__))) ."\\simulation\\Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+	//echo (dirname(dirname(dirname(__FILE__))) ."\\simulation\\Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+	shell_exec("Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+	
+	//popen("start /B " .(dirname(dirname(dirname(__FILE__))) ."\\simulation\\Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\""), "r");
+	
 	//Read the updated performance measures
-    $readFile = dirname(dirname(dirname(__FILE__))) . '\\' . 'simulation\\' . $queueName . '\\' . 'queue.txt';
+
+    //$readFile = dirname(dirname(dirname(__FILE__))) . '\\' . 'simulation\\' . $queueName . '\\' . 'queue.txt';
+	$readFile = $queueName . '\\' . 'queue.txt';
     $fileContents = file_get_contents($readFile);
     $parameters = explode(',', $fileContents);
 
@@ -93,6 +100,7 @@ if(isset($_POST['enqueue_patient'])){
 				if(!$query){
 					echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
 				}
+				echo "params: " . ($param[1] . "-" .$param[2] . "-" .$param[3]. "-" . $param[4]. "-" .$param[5]. "-" .$param[6]);
 			}    
     }
 
@@ -100,7 +108,7 @@ if(isset($_POST['enqueue_patient'])){
 }
 
 //End
-header("Location: ../../index.php");
+//header("Location: ../../index.php");
 exit();
 
 
