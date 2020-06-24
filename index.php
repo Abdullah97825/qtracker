@@ -18,7 +18,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, intial-scale=1">
-    <title>QTracker Recptionist UI</title>
+    <title>QTracker Receptionist UI</title>
 <!-- These links tags add bootstrap and jQuery to the code as well as link the
 style.css and script.js files-->
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
