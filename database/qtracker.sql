@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2020 at 03:05 PM
+-- Generation Time: Jun 19, 2020 at 09:48 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -40,8 +40,6 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`ssn`, `email`, `password`, `available`) VALUES
-(1, '1@1.com', 'c4ca4238a0b923820dcc509a6f75849b', 1),
-(1000, '1000@1000.com', 'c4ca4238a0b923820dcc509a6f75849b', 1),
 (2000, '2000@2000.com', '08f90c1a417155361a5c4b8d297e0d78', 1);
 
 -- --------------------------------------------------------
@@ -162,13 +160,6 @@ CREATE TABLE `er_queue` (
   `flag` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `er_queue`
---
-
-INSERT INTO `er_queue` (`a`, `b`, `c`, `d`, `ts`, `flag`) VALUES
-(2, 0, 0, 0, '2020-02-08 16:07:50', 'f');
-
 -- --------------------------------------------------------
 
 --
@@ -219,37 +210,6 @@ INSERT INTO `patients` (`id`, `name`, `phone`, `address`, `user_closed`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `q1`
---
-
-CREATE TABLE `q1` (
-  `patientID` int(11) NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `q1`
---
-
-INSERT INTO `q1` (`patientID`, `ts`) VALUES
-(1, '2020-02-15 12:52:54'),
-(2, '2020-02-15 12:53:08'),
-(3, '2020-02-15 12:53:21');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `q1000`
---
-
-CREATE TABLE `q1000` (
-  `patientID` int(11) NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `q2000`
 --
 
@@ -269,8 +229,11 @@ CREATE TABLE `q2000` (
 --
 
 INSERT INTO `q2000` (`patientID`, `ts`, `arrivalTime`, `serviceTime`, `departureTime`, `waitingTime`, `tsb`, `timeInSystem`) VALUES
-(5, '2020-04-13 23:48:43', 0, 0, 0, 0, 0, 0),
-(6, '2020-04-13 23:50:05', 0, 0, 0, 0, 0, 0);
+(4, '2020-06-12 20:11:05', 0, 0, 0, 0, 0, 0),
+(5, '2020-06-12 20:11:14', 0, 0, 0, 0, 0, 0),
+(6, '2020-06-12 20:11:17', 0, 0, 0, 0, 0, 0),
+(7, '2020-06-12 20:11:22', 0, 0, 0, 0, 0, 0),
+(8, '2020-06-12 20:11:26', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -288,11 +251,11 @@ CREATE TABLE `queue` (
 --
 
 INSERT INTO `queue` (`patientID`, `doctor`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
+(4, 2000),
 (5, 2000),
-(6, 2000);
+(6, 2000),
+(7, 2000),
+(8, 2000);
 
 -- --------------------------------------------------------
 
@@ -312,6 +275,7 @@ CREATE TABLE `receptionists` (
 
 INSERT INTO `receptionists` (`ssn`, `email`, `password`) VALUES
 (2, '2@2.com', 'c81e728d9d4c2f636f067f89cc14862c'),
+(3000, '3000@3000.com', 'e93028bdc1aacdfb3687181f2031765d'),
 (4000, '4000@4000.com', 'c4ca4238a0b923820dcc509a6f75849b');
 
 -- --------------------------------------------------------
@@ -406,18 +370,6 @@ ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `q1`
---
-ALTER TABLE `q1`
-  ADD PRIMARY KEY (`patientID`);
-
---
--- Indexes for table `q1000`
---
-ALTER TABLE `q1000`
-  ADD PRIMARY KEY (`patientID`);
-
---
 -- Indexes for table `q2000`
 --
 ALTER TABLE `q2000`
@@ -498,18 +450,6 @@ ALTER TABLE `er_d`
 --
 ALTER TABLE `er_q`
   ADD CONSTRAINT `er_q_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `q1`
---
-ALTER TABLE `q1`
-  ADD CONSTRAINT `q1_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`);
-
---
--- Constraints for table `q1000`
---
-ALTER TABLE `q1000`
-  ADD CONSTRAINT `q1000_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `q2000`
