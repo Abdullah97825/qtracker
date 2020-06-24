@@ -36,7 +36,7 @@ if(isset($_POST['enqueue_patient'])){
 
 	//$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
 	$outPutFile_Dir = $queueName . "/" . "input.txt";
-	$outPutFile = fopen($outPutFile_Dir, "a") or die("Unable to open file");
+	$outPutFile = fopen($outPutFile_Dir, "w") or die("Unable to open file");
 
 	$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
 	if(!$query){
