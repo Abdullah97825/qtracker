@@ -7,7 +7,7 @@ $password = $_POST["password"];
 
 
 if($con){
-    //echo "connected....!";
+    //echo "connected";
 
     $q = "SELECT * FROM users WHERE email='$email' AND password='$password'";
     $s = "SELECT * FROM users INNER JOIN queue ON users.id = queue.patientID WHERE users.email='$email'";

@@ -63,6 +63,7 @@ if(isset($_POST['register_button']) && ($type === "patient")){
 		}
 	}
 
+	//Restrictions removed for demo purposes
 /*
 	if(strlen($password > 30 || strlen($password) < 5)) {
 		array_push($error_array, "Your password must be betwen 5 and 30 characters<br>");

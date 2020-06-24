@@ -17,7 +17,6 @@ if(isset($_POST['enqueue_patient'])){
 	$_SESSION['enqueue_id'] = $id; //Stores id into session variable
 
 	//Doctor's name
-	//$maker = mysql_real_escape_string($_POST['selected_text']);
 	$doctorName = strip_tags($_POST['selected_text']); //Remove html tags
 	$doctorName = str_replace(' ', '', $doctorName); //remove spaces
 	$_SESSION['selected_text'] = $doctorName; //Stores first name into session variable

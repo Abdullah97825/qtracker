@@ -15,14 +15,6 @@ if(isset($_POST['remove_Patient'])){
         $id = strip_tags($_POST['remove_id']); //Remove html tags
         $id = str_replace(' ', '', $id);       //remove spaces
 
-        //Get the rows from the database
-        //$result = mysqli_query($con, "SELECT * FROM queue WHERE patientID='$patientID'");
-
-        //Get the first row
-        //$row = mysqli_fetch_array($result);   
-
-        //Get the doctor's queue name
-        //$queueName = 'q' . $row['doctor'];
         $queueName = strip_tags($_POST['doc_queue']); //Remove html tags
         $queueName = str_replace(' ', '', $queueName);//remove spaces
     }

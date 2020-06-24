@@ -38,8 +38,6 @@
         public function getServiceTime(){
             return 15;
         }
-	//public function getWaitingTime(){}
-	//public function getTimeInSystem(){}
 
 	    public function getWaitingTime(){
             $this->queueEntries = mysqli_query($con, "SELECT * FROM $qName WHERE patientID='$pID'");

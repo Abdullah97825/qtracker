@@ -18,7 +18,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width = device-width, intial-scale=1">
-    <title>QTracker Receptionist UI</title>
+    <title>QTracker Recptionist UI</title>
 <!-- These links tags add bootstrap and jQuery to the code as well as link the
 style.css and script.js files-->
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -51,9 +51,6 @@ style.css and script.js files-->
       <div class="dynamicButton">
         <button type="button" id="queueBtn" class="btn" data-toggle="modal" data-target="#queueModal">
           <i class='fas fa-plus'></i> Add To Queue
-        </button>
-        <button type="button" id="appointBtn" class="btn" data-toggle="modal" data-target="#appointModal">
-          <i class='fas fa-plus'></i> Add Appointment
         </button>
         <button type="button" id="patientBtn" class="btn" data-toggle="modal" data-target="#patientModal">
           <i class='fas fa-plus'></i> Add Patient
@@ -104,57 +101,10 @@ style.css and script.js files-->
             </div>
           </div>
 
-
-        <!--Commented this out modal footer out because it was causing the problem in the display.
-            if you need it, add it into the modal div not outside -->
-
-
-        <!--  <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
-          </div> -->
         </div>
       </div>
     </div>
 
-  <!-- Appointment Modal-->
-
-    <div id="appointModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4>New Appointment</h4>
-          </div>
-          <div class="modal-body">
-            <div class="modalBody">
-              <label for="patientSearch">Patient ID*</label>
-              <label for="doctorSearch">Doctor*</label>
-              <input id="patientSearch" type="text" placeholder="search">
-              <select class="" name="">
-                <?php
-                  $doctorsEntries = mysqli_query($con, "SELECT * FROM employees WHERE position=1");
-                  $i = 1;
-                  if(!$doctorsEntries){
-                    echo "Error: " . mysqli_error($con);
-                  }
-                    while($row = mysqli_fetch_array($doctorsEntries)){
-                         echo "<option value=\"" . $i . "\">Dr " . $row['name'] . " " . $row['lname'] . "</option>";
-                         $i = $i + 1;
-                    }
-                ?>
-              </select>
-              <label for="appointDate"></label>
-              <label for=""></label>
-              <input id="appointDate" type="date" name="" value="2019-12-21">
-              <input id="appointTime" type="time" name="" >
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
 <!-- patient Modal -->
     <div id="patientModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
@@ -220,11 +170,9 @@ style.css and script.js files-->
       <div class="sideBar">
         <div class="section1">
           <a href="#" id="queuetab">Queue</a>
-          <a href="#" id="appointtab">Appointments</a>
           <a href="#" id="patienttab">Patient Folders</a>
         </div>
         <div class="section2">
-          <a href="#">Settings</a>
           <a href="#">Help</a>
         </div>
       </div>
@@ -237,21 +185,6 @@ style.css and script.js files-->
         </div>
         <div class="column">
           Arrival Time
-        </div>
-      </div>
-
-      <div class="appointmentblock">
-        <div class="column">
-          ID
-        </div>
-        <div class="column">
-          Patient Name
-        </div>
-        <div class="column">
-          Date
-        </div>
-        <div class="column">
-          Time
         </div>
       </div>
 
