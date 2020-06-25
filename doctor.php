@@ -53,6 +53,85 @@ style.css and script.js files-->
           echo "<h5>" . $row['name'] . " " . $row['lname'] . "</h5>";
         ?>
       </div>
+
+      <div>
+        <button type="button" id="serveBtn" class="btn" data-toggle="modal" data-target="#serviceModal">
+          <i class='fas fa-plus'></i> Adjust Service Time
+        </button>
+      </div>
+    </div>
+
+
+    </div>
+
+    
+
+<!--
+    <div id="queueModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>Service Time</h4>
+          </div>
+          <div class="modal-body">
+            <div class="modalBody">
+              <label for="newTime">New Time*</label>
+              <input type="number" name="" value="00" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+
+    <div id="serviceModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>Service Time</h4>
+          </div>
+          <div class="modal-body">
+            <form class="modalBody" action="includes/handlers/adjustServiceTime.php" method="post" id="patientForm">
+              <label for="patientNote">Add Service Time</label>
+              <!--<textarea name="name" rows="8" cols="80" form="patientForm">...</textarea>-->
+              <input type="text" name="amount" placeholder="Enter amount (minutes)" value="<?php 
+                  if(isset($_SESSION['amount'])) {
+                    echo $_SESSION['amount'];
+                  } 
+                  ?>">
+              <input  type="submit" name="adjust_service" value="Next Patient" class="btn btn-default">
+              <?php
+                    $email = $_SESSION['emailDoc'];
+                    $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
+                    if(!$doctorsEntries){
+                      echo "Error: (doctorEntries) " . mysqli_error($con);
+                    }
+
+                    $row = mysqli_fetch_array($doctorsEntries);
+                    $queueName = 'q' . $row['ssn'];
+
+                    $_SESSION['docQueue'] = $queueName;
+                    $_SESSION['docPostID'] = $row['ssn'];
+
+                    $queueEntries = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
+                    if(!$queueEntries){
+                            echo "Error: (queueEntries) " . mysqli_error($con);
+                    }
+
+                    $row = mysqli_fetch_array($queueEntries);
+                    $patientID = $row['patientID'];
+                    $_SESSION['id'] = $patientID;
+                ?>
+
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
 

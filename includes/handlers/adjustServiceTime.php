@@ -3,7 +3,7 @@
 //Connect to the database
 require '../../config/config.php';
 
-if(isset($_POST['remove_Patient'])){
+if(isset($_POST['adjust_service'])){
 
     if(isset($_SESSION['id']) And isset($_SESSION['docQueue']))
     {
@@ -20,18 +20,12 @@ if(isset($_POST['remove_Patient'])){
     }
 
 	//Post doctor notes
-	$note = strip_tags($_POST['note']);
-	$docPostId = $_SESSION['docPostID'];
+	$amountStr = strip_tags($_POST['amount']);
+    $amount = (int)$amountStr;
 
-	$query = mysqli_query($con, "INSERT INTO posts VALUES ('$id', '$docPostId', '$note', CURRENT_TIMESTAMP)");
-	
-	if(!$query){
-		echo "Error: " . mysqli_error($con);
-	}
+	echo "sent: " . "doc: " . $queueName . " and amount: " . $amount;
 
-	echo "Posted to: " . $id . " and doc: " . $docPostId . " and note: " . $note;
-
-
+/*
 	$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
 	$outPutFile = fopen($outPutFile_Dir, "a") or die("Unable to open file");
 
@@ -91,8 +85,9 @@ if(isset($_POST['remove_Patient'])){
 
 $_SESSION['id'] = "";
 $_SESSION['docQueue'] = "";
-
-header("Location: ../../doctor.php");
+*/
+//header("Location: ../../doctor.php");
+}
 exit();
 
 ?>

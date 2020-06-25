@@ -77,15 +77,56 @@ if(isset($_POST['enqueue_patient'])){
     //shell_exec(dirname(dirname(dirname(__FILE__))) ."\\simulation\\Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
 	//echo (dirname(dirname(dirname(__FILE__))) ."\\simulation\\Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
 	shell_exec("Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
-	
+	sleep(1);
 	//popen("start /B " .(dirname(dirname(dirname(__FILE__))) ."\\simulation\\Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\""), "r");
 	
 	//Read the updated performance measures
 
     //$readFile = dirname(dirname(dirname(__FILE__))) . '\\' . 'simulation\\' . $queueName . '\\' . 'queue.txt';
-	$readFile = $queueName . '\\' . 'queue.txt';
-    $fileContents = file_get_contents($readFile);
-    $parameters = explode(',', $fileContents);
+	$readFile = $queueName . '/' . 'queue.txt';
+    //$fileContents = file_get_contents($readFile);
+    //$parameters = explode(',', $fileContents);
+
+	//Open queue.txt file to get the updated queue
+	$queueFile = fopen($readFile, "r") or die("Unable to open queue.txt");
+
+	if ($queueFile) {
+
+		$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
+		if(!$query){
+			echo "Error (Read doctor queue enqueue.php): " . mysqli_error($con);
+		}
+
+    	while (($line = fgets($queueFile)) !== false) {
+        	// process the line read.
+			$parameters = explode(',', $line);
+			$row = mysqli_fetch_array($query);
+			$patientID = $row['patientID'];
+			echo "\nID is: " . $patientID;
+			$query2 = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$parameters[1]', serviceTime='$parameters[2]', departureTime='$parameters[3]', waitingTime='$parameters[4]', tsb='$parameters[5]', timeInSystem='$parameters[6]' WHERE patientID='$patientID'");
+			if(!$query2){
+				echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
+			}
+			echo "params: " . ($parameters[1] . "-" .$parameters[2] . "-" .$parameters[3]. "-" . $parameters[4]. "-" .$parameters[5]. "-" .$parameters[6]);
+
+    	}
+
+
+	}
+
+/*
+		$patientID = $row['patientID'];
+		$query = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$parameters[1]', serviceTime='$parameters[2]', departureTime='$parameters[3]', waitingTime='$parameters[4]', tsb='$parameters[5]', timeInSystem='$parameters[6]' WHERE patientID='$patientID'");
+			if(!$query){
+				echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
+			}
+			echo "params: " . ($param[1] . "-" .$param[2] . "-" .$param[3]. "-" . $param[4]. "-" .$param[5]. "-" .$param[6]);
+
+    	}
+    fclose($queueFile);
+	} else {
+		// error opening the file.
+	} 
 
 	//Update the PM's for the queue
 
@@ -93,6 +134,7 @@ if(isset($_POST['enqueue_patient'])){
 	if(!$query){
 		echo "Error (Read doctor queue enqueu.php): " . mysqli_error($con);
 	}
+
 	while($row = mysqli_fetch_array($query)){
 		foreach($parameters as $param){
 			$patientID = $row['patientID'];
@@ -102,7 +144,7 @@ if(isset($_POST['enqueue_patient'])){
 				}
 				echo "params: " . ($param[1] . "-" .$param[2] . "-" .$param[3]. "-" . $param[4]. "-" .$param[5]. "-" .$param[6]);
 			}    
-    }
+    }*/
 
     
 }
