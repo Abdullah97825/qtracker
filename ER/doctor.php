@@ -41,6 +41,14 @@ style.css and script.js files-->
         </label>
         <h5>UserName</h5>
       </div>
+	<div class="dynamicButton ">
+        <button type="button" id="queueBtn" class="btn">
+          <i class='fas fa-plus'></i>
+          <form action="includes/handlers/removeFromQueue.php" method="POST">
+            <input type="submit" name="remove_Patient" value="Next Patient" class="pButton">
+          </form>
+        </button>
+      </div>
     </div>
 
 
@@ -49,9 +57,6 @@ style.css and script.js files-->
         <div class="section1">
           <a href="#" id="queuetab">Queue</a>
           <a href="#" id="patienttab">Patient Folders</a>
-          <form action="includes/handlers/removeFromQueue.php" method="POST">
-                  <input  type="submit" name="remove_Patient" value="Next Patient">
-          </form>
         </div>
         <div class="section2">
           <a href="#">Help</a>
