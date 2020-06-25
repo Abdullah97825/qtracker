@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2020 at 09:48 PM
+-- Generation Time: Jun 25, 2020 at 08:17 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -40,6 +40,7 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`ssn`, `email`, `password`, `available`) VALUES
+(1000, '1000@1000.com', 'a9b7ba70783b617e9998dc4dd82eb3c5', 1),
 (2000, '2000@2000.com', '08f90c1a417155361a5c4b8d297e0d78', 1);
 
 -- --------------------------------------------------------
@@ -160,6 +161,13 @@ CREATE TABLE `er_queue` (
   `flag` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `er_queue`
+--
+
+INSERT INTO `er_queue` (`a`, `b`, `c`, `d`, `ts`, `flag`) VALUES
+(0, 0, 0, 0, '2020-06-25 16:34:40', 'f');
+
 -- --------------------------------------------------------
 
 --
@@ -210,6 +218,47 @@ INSERT INTO `patients` (`id`, `name`, `phone`, `address`, `user_closed`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `patientID` int(11) NOT NULL,
+  `ssn` int(11) NOT NULL,
+  `note` varchar(255) NOT NULL,
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`patientID`, `ssn`, `note`, `ts`) VALUES
+(1, 2000, 'this is my note', '2020-06-24 13:37:39'),
+(1, 2000, 'this my note 2', '2020-06-24 13:38:18'),
+(1, 2000, 'this is note 3', '2020-06-24 21:48:05'),
+(1, 2000, 'this is my note', '2020-06-25 14:16:21'),
+(1, 2000, 'this is my note', '2020-06-25 15:47:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `q1000`
+--
+
+CREATE TABLE `q1000` (
+  `patientID` int(11) NOT NULL,
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `arrivalTime` int(11) DEFAULT NULL,
+  `serviceTime` int(11) DEFAULT NULL,
+  `departureTime` int(11) DEFAULT NULL,
+  `waitingTime` int(11) DEFAULT NULL,
+  `tsb` int(11) DEFAULT NULL,
+  `timeInSystem` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `q2000`
 --
 
@@ -229,11 +278,7 @@ CREATE TABLE `q2000` (
 --
 
 INSERT INTO `q2000` (`patientID`, `ts`, `arrivalTime`, `serviceTime`, `departureTime`, `waitingTime`, `tsb`, `timeInSystem`) VALUES
-(4, '2020-06-12 20:11:05', 0, 0, 0, 0, 0, 0),
-(5, '2020-06-12 20:11:14', 0, 0, 0, 0, 0, 0),
-(6, '2020-06-12 20:11:17', 0, 0, 0, 0, 0, 0),
-(7, '2020-06-12 20:11:22', 0, 0, 0, 0, 0, 0),
-(8, '2020-06-12 20:11:26', 0, 0, 0, 0, 0, 0);
+(2, '2020-06-25 15:46:02', 1095651911, 1095651913, -2103663472, 0, 1095651911, 1095651913);
 
 -- --------------------------------------------------------
 
@@ -251,11 +296,7 @@ CREATE TABLE `queue` (
 --
 
 INSERT INTO `queue` (`patientID`, `doctor`) VALUES
-(4, 2000),
-(5, 2000),
-(6, 2000),
-(7, 2000),
-(8, 2000);
+(2, 2000);
 
 -- --------------------------------------------------------
 
@@ -370,6 +411,19 @@ ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`patientID`,`ssn`,`ts`),
+  ADD KEY `ssn` (`ssn`);
+
+--
+-- Indexes for table `q1000`
+--
+ALTER TABLE `q1000`
+  ADD PRIMARY KEY (`patientID`);
+
+--
 -- Indexes for table `q2000`
 --
 ALTER TABLE `q2000`
@@ -450,6 +504,19 @@ ALTER TABLE `er_d`
 --
 ALTER TABLE `er_q`
   ADD CONSTRAINT `er_q_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`ssn`) REFERENCES `doctors` (`ssn`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `q1000`
+--
+ALTER TABLE `q1000`
+  ADD CONSTRAINT `q1000_ibfk_1` FOREIGN KEY (`patientID`) REFERENCES `patients` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `q2000`
