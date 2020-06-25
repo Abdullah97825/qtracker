@@ -32,8 +32,8 @@ if(isset($_POST['remove_Patient'])){
 	echo "Posted to: " . $id . " and doc: " . $docPostId . " and note: " . $note;
 
 
-	$outPutFile_Dir = "../../simulation/" . $queueName . "/" . "input.txt";
-	$outPutFile = fopen($outPutFile_Dir, "a") or die("Unable to open file");
+	$outPutFile_Dir = $queueName . "/" . "input.txt";
+	$outPutFile = fopen($outPutFile_Dir, "w") or die("Unable to open file");
 
 	$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
 	if(!$query){
@@ -55,8 +55,8 @@ if(isset($_POST['remove_Patient'])){
 
 	$simulation_Input_Dir = $queueName . "/";
 
-	echo ("simulation/Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
-    shell_exec(dirname(dirname(dirname(__FILE__))) ."simulation/Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+	echo ("Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
+    shell_exec("Simulation.exe \"".$mode."\" \"".$simulation_Input_Dir."\"");
 
     //Delete patient from the doctor's queue
 	$query = mysqli_query($con, "DELETE FROM $queueName WHERE patientID='$id'");
@@ -65,25 +65,34 @@ if(isset($_POST['remove_Patient'])){
     $query = mysqli_query($con, "DELETE FROM queue WHERE patientID='$id'");
 
 	//Read the updated queue and performance measures
-    $readFile = dirname(dirname(dirname(__FILE__))) . '\\' . 'simulation\\' . $queueName . '\\' . 'queue.txt';
-    $fileContents = file_get_contents($readFile);
-    $parameters = explode(',', $fileContents);
+    $readFile = $queueName . '\\' . 'queue.txt';
 
-	//Update the PM's for the queue
-    $query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
-	if(!$query){
-		echo "Error (Read doctor queue enqueu.php): " . mysqli_error($con);
+	//Open queue.txt file to get the updated queue
+	$queueFile = fopen($readFile, "r") or die("Unable to open queue.txt");
+
+	if ($queueFile) {
+
+		$query = mysqli_query($con, "SELECT * FROM $queueName ORDER By ts ASC");
+		if(!$query){
+			echo "Error (Read doctor queue removeFromQueue.php): " . mysqli_error($con);
+		}
+
+    	while (($line = fgets($queueFile)) !== false) {
+        	// process the line read.
+			$parameters = explode(',', $line);
+			$row = mysqli_fetch_array($query);
+			$patientID = $row['patientID'];
+			echo "\nID is: " . $patientID;
+			$query2 = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$parameters[1]', serviceTime='$parameters[2]', departureTime='$parameters[3]', waitingTime='$parameters[4]', tsb='$parameters[5]', timeInSystem='$parameters[6]' WHERE patientID='$patientID'");
+			if(!$query2){
+				echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
+			}
+			echo "params: " . ($parameters[1] . "-" .$parameters[2] . "-" .$parameters[3]. "-" . $parameters[4]. "-" .$parameters[5]. "-" .$parameters[6]);
+
+    	}
+
+
 	}
-	while($row = mysqli_fetch_array($query)){
-		
-		foreach($parameters as $param){
-            $patientID = $row['patientID'];
-			$query = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$param[1]', serviceTime='$param[2]', departureTime='$param[3]', waitingTime='$param[4]', tsb='$param[5]', timeInSystem='$param[6]' WHERE patientID='$patientID'");
-				if(!$query){
-					echo "Error (Update queue parameters enqueue.php): " . mysqli_error($con);
-				}
-			}    
-    }
 
 }
 
@@ -92,7 +101,7 @@ if(isset($_POST['remove_Patient'])){
 $_SESSION['id'] = "";
 $_SESSION['docQueue'] = "";
 
-header("Location: ../../doctor.php");
+//header("Location: ../../doctor.php");
 exit();
 
 ?>

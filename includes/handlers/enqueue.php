@@ -114,6 +114,41 @@ if(isset($_POST['enqueue_patient'])){
 
 	}
 
+
+
+    
+}
+
+//End
+//header("Location: ../../index.php");
+exit();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 		$patientID = $row['patientID'];
 		$query = mysqli_query($con, "UPDATE $queueName SET arrivalTime='$parameters[1]', serviceTime='$parameters[2]', departureTime='$parameters[3]', waitingTime='$parameters[4]', tsb='$parameters[5]', timeInSystem='$parameters[6]' WHERE patientID='$patientID'");
@@ -144,18 +179,4 @@ if(isset($_POST['enqueue_patient'])){
 				}
 				echo "params: " . ($param[1] . "-" .$param[2] . "-" .$param[3]. "-" . $param[4]. "-" .$param[5]. "-" .$param[6]);
 			}    
-    }*/
-
-    
-}
-
-//End
-//header("Location: ../../index.php");
-exit();
-
-
-?>
-
-
-
-
+    }*/?>
