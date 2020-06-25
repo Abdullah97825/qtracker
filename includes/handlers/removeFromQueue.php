@@ -101,7 +101,7 @@ if(isset($_POST['remove_Patient'])){
 $_SESSION['id'] = "";
 $_SESSION['docQueue'] = "";
 
-//header("Location: ../../doctor.php");
+header("Location: ../../doctor.php");
 exit();
 
 ?>

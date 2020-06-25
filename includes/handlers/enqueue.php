@@ -120,7 +120,7 @@ if(isset($_POST['enqueue_patient'])){
 }
 
 //End
-//header("Location: ../../index.php");
+header("Location: ../../index.php");
 exit();
 
 
