@@ -104,7 +104,7 @@ style.css and script.js files-->
                     echo $_SESSION['amount'];
                   } 
                   ?>">
-              <input  type="submit" name="adjust_service" value="Next Patient" class="btn btn-default">
+              <input  type="submit" name="adjust_service" value="Add Time" class="btn btn-default">
               <?php
                     $email = $_SESSION['emailDoc'];
                     $doctorsEntries = mysqli_query($con, "SELECT * FROM doctors WHERE email='$email'");
