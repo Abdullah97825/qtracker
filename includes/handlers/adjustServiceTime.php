@@ -168,7 +168,7 @@ if(isset($_POST['adjust_service'])){
 $_SESSION['id'] = "";
 $_SESSION['docQueue'] = "";
 */
-//header("Location: ../../doctor.php");
+header("Location: ../../doctor.php");
 }
 exit();
 
