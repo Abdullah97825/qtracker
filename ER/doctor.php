@@ -35,11 +35,7 @@ style.css and script.js files-->
       <div class="navItems">
         <h1>QTracker</h1>
         <h3>Doctors Interface</h3>
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
-        <h5>UserName</h5>
+
       </div>
 	<div class="dynamicButton ">
         <button type="button" id="queueBtn" class="btn">

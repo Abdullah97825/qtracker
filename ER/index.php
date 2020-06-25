@@ -33,7 +33,6 @@ style.css and script.js files-->
       <div class="navItems">
         <h1>QTracker</h1>
         <h3>ER Receptionists Interface</h3>
-        <h5>UserName</h5>
       </div>
 
       <div class="dynamicButton">
