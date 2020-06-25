@@ -36,8 +36,7 @@ style.css and script.js files-->
         <h1>QTracker</h1>
         <h3>Doctors Interface</h3>
         <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
+          
         </label>
         <?php
           $email = $_SESSION['emailDoc'];
@@ -139,7 +138,7 @@ style.css and script.js files-->
       <div class="sideBar">
         <div class="section1">
           <a href="#" id="queuetab">Queue</a>
-          <a href="#" id="patienttab">Patient Folders</a>
+          
           <input  type="button" name="remove_Patient" value="Next Patient" class="nextPatientBtn" data-toggle="modal" data-target="#nextPatientModal">
         </div>
         <div class="section2">
