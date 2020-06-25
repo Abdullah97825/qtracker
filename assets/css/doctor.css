@@ -181,15 +181,17 @@ h3 {
 
 
 /*side bar and content blocks*/
+
+
 /*Side bar begins here*/
+
 .wrapper {
     display: grid;
     grid-template-columns: 15% 85%;
     grid-column-gap: 1em;
     position: relative;
     margin: -18px auto;
-    height:100%;
-
+    height: 100%;
 }
 
 .sideBar {
@@ -206,6 +208,7 @@ h3 {
     text-decoration: none;
 }
 
+
 /*Replaced .sideBar input[type=submit] with a class .nextPatientBtn*/
 
 .nextPatientBtn {
@@ -213,21 +216,20 @@ h3 {
     color: white;
     display: block;
     padding: 2em 0em 2em 0em;
-    width:100%;
+    width: 100%;
     text-align: center;
     text-decoration: none;
-    border:none;
+    border: none;
 }
-
 
 .nextPatientBtn:hover {
     opacity: 0.4;
-    transition:  ease-in .2s;
+    transition: ease-in .2s;
 }
 
 .sideBar a:hover {
     opacity: 0.4;
-    transition:  ease-in .2s;
+    transition: ease-in .2s;
 }
 
 .section1 {
@@ -237,6 +239,8 @@ h3 {
 .section2 {
     display: block;
 }
+
+
 /*SideBar ends here*/
 
 
@@ -247,6 +251,7 @@ apart.*/
 .queueblock {
     display: grid;
     grid-template-columns: repeat(3, 3fr);
+    grid-template-rows: repeat(8, 8fr);
     color: #85869d;
     text-align: center;
     padding-top: 2em;

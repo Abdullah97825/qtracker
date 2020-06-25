@@ -29,13 +29,13 @@ body {
     background-color: white;
     color: #F90915;
     font-weight: normal;
-    display:flex;
+    display: flex;
 }
 
-.pButton{
-  border: none;
-  outline:none;
-  background:#fff;
+.pButton {
+    border: none;
+    outline: none;
+    background: #fff;
 }
 
 
@@ -193,9 +193,9 @@ h3 {
     display: grid;
     grid-template-columns: 15% 85%;
     grid-column-gap: 1em;
-    margin:-18px auto;
+    margin: -18px auto;
     position: relative;
-    height:100%;
+    height: 100%;
 }
 
 .sideBar {
@@ -212,14 +212,12 @@ h3 {
     text-decoration: none;
 }
 
-
-
-.nextPatientBtn{
+.nextPatientBtn {
     display: block;
     background-color: #F90915;
     color: white;
     padding: 2em 0em 2em 0em;
-    width:100%;
+    width: 100%;
     text-align: center;
     text-decoration: none;
     border: none;
@@ -251,6 +249,7 @@ apart.*/
 .queueblock {
     display: grid;
     grid-template-columns: repeat(4, 4fr);
+    grid-template-rows: repeat(8, 8fr);
     color: #85869d;
     text-align: center;
     padding-top: 2em;
