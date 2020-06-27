@@ -1,7 +1,7 @@
 <?php
 require 'config/config.php';
 
-    function getAvgVisitTime() {
+    function getAvgVisitTime($con) {
 
         $sumOfAverages = 0;
         $n = 0;
@@ -16,7 +16,7 @@ require 'config/config.php';
             $queueName = 'q' . $row['ssn'];
 
             $queueEntries = mysqli_query($con, "SELECT AVG(waitingTime) AS average FROM $queueName ");
-            $row2 = mysql_fetch_assoc($queueEntries);
+            $row2 = mysqli_fetch_array($queueEntries);
 
             $sumOfAverages = $sumOfAverages + $row2['average'];
             $n = $n + 1;
@@ -28,7 +28,7 @@ require 'config/config.php';
 
     if($con){
 
-       echo getAvgVisitTime()
+       echo getAvgVisitTime($con)
     }
 
 ?>
