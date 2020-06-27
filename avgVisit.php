@@ -23,12 +23,12 @@ require 'config/config.php';
 
         }
 
-        return($sumOfAverages/$n)
+        return($sumOfAverages/$n);
     }
 
     if($con){
 
-       echo getAvgVisitTime($con)
+       echo getAvgVisitTime($con);
     }
 
 ?>
